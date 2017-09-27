@@ -1,0 +1,131 @@
+﻿
+@*   
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+*@
+
+@*@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<script>
+    var inputText = "";
+    var storedText = "";
+    var op = "";
+
+
+
+
+function buttonNumfunct(p1) {
+    //var mytext = "";
+    //return mytext + p1;
+    document.getElementById("textStr").innerHTML += p1;
+    inputText += p1;
+
+    }
+
+    function opHandler(inputOp) {
+        
+        if (op == "" && storedText == "") {
+            op = inputOp;
+            document.getElementById("textStr").innerHTML += op;
+            storedText = inputText;
+            inputText = "";
+        }
+
+        else if (op == "") {
+            op = inputOp;
+            document.getElementById("textStr").innerHTML += op;
+        }
+    }
+
+    function periodHandler() {
+        var deciFlag = false;
+        for (i = 0; i < inputText.length; i++) {
+            if (inputText[i] == '.') {
+                deciFlag = true;
+            }
+        }
+        if (deciFlag != true) {
+            inputText += '.';
+            document.getElementById("textStr").innerHTML += '.';
+        }
+    }
+
+    function equalsHandler() {
+        if (op == "+") {
+            storedText = (parseFloat(storedText) + parseFloat(inputText)).toString();
+        }
+
+        else if (op == "-") {
+            storedText = (parseFloat(storedText) - parseFloat(inputText)).toString();
+        }
+
+        else if (op == "*") {
+            storedText = (parseFloat(storedText) * parseFloat(inputText)).toString();
+        }
+
+        else if (op == "/") {
+            storedText = (parseFloat(storedText) / parseFloat(inputText)).toString();
+        }
+
+        inputText = "";
+        op = "";
+
+        document.getElementById("textStr").innerHTML = storedText;
+
+
+
+    }
+
+    function clearHandler() {
+        inputText = "";
+        storedText = "";
+        op = "";
+        document.getElementById("textStr").innerHTML = "";
+    }
+
+
+</script>
+
+
+
+<h2>Calculator</h2>
+
+<p id="textStr"></p>
+
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('1')">1</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('2')">2</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('3')">3</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="opHandler('+')">+</button> <br />
+
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('4')">4</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('5')">5</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('6')">6</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="opHandler('-')">-</button> <br />
+
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('7')">7</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('8')">8</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('9')">9</button>
+<button style="padding: 0.2em 0.5em;" type="button" onclick="opHandler('*')">*</button> <br />
+
+<button style="padding: 0.2em 0.5em;" type="button" onclick="buttonNumfunct('0')">0</button>
+<button style="padding: 0.2em 0.625em;" type="button" onclick="periodHandler('.')">.</button>
+<button style="padding: 0.2em 0.625em;" type="button" onclick="opHandler('/')">/</button> <br />
+
+<button style="padding: 0.2em 0.625em;" type="button" onclick="clearHandler()">Clear</button>
+<button style="padding: 0.2em 1.5em;" type="button" onclick="equalsHandler()">=</button>
